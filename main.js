@@ -1,23 +1,21 @@
 const connection = new WebSocket('ws://localhost:8080');
-const http = require('http');
-const express = require('express');
-const path = require('path');
-const app = express();
-app.use(express.json());
-app.use(express.static("express"));
-// default URL for website
-app.use('/', function(req,res){
-    res.sendFile(path.join(__dirname+'/index.html'));
-    //__dirname : It will resolve to your project folder.
-  });
-const server = http.createServer(app);
-const port = 3000;
-server.listen(port);
-console.debug('Server listening on port ' + port);
+var http = require('http'); // Import Node.js core module
 
+var server = http.createServer(function (req, res) {   //create web server
+    if (req.url == '/') { //check the URL of the current request
+        
+        // set response header
+        res.writeHead(200, { 'Content-Type': 'text/html' }); 
+        
+        // set response content    
+        res.write('<html><body><p>This is home Page.</p></body></html>');
+        res.end();
+    
+    }
+    
+server.listen(5000); //6 - listen for any incoming requests
 
-
-
+console.log('Node.js web server at port 5000 is running..')    
 
 
 connection.onopen = () => {
