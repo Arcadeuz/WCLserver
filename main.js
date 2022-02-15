@@ -1,10 +1,12 @@
 // importamos las librerías requeridas
-const path = require("path");
+
 const express = require('express');
-const cors = require('cors');
 const app = express();
+const path = require("path");
+
 const server = require('http').Server(app);
 const WebSocketServer = require("websocket").server;
+const cors = require('cors');
 
 // Creamos el servidor de sockets y lo incorporamos al servidor de la aplicación
 const wsServer = new WebSocketServer({
@@ -14,9 +16,10 @@ const wsServer = new WebSocketServer({
 
 // Especificamos el puerto en una varibale port, incorporamos cors, express 
 // y la ruta a los archivo estáticos (la carpeta public)
-app.set("port", 3001);
-app.use(cors());
-app.use(express.json());
+//app.set("port", 3001);
+//app.use(cors());
+//app.use(express.json());
+
 app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname, '/index.html'));
 });
