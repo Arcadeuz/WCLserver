@@ -3,8 +3,8 @@ const app = express();
 const path = require('path');
 
 const server = require('http').Server(app);
-const WebSocketServer = require("websocket").server;
-const cors = require('cors');
+//const WebSocketServer = require("websocket").server;
+//const cors = require('cors');
 
 
 app.get('/', function(req, res) {
