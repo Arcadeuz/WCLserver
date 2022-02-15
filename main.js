@@ -1,4 +1,19 @@
-// importamos las librerías requeridas
+const express = require('express');
+const app = express();
+const path = require('path');
+
+app.get('/', function(req, res) {
+  res.sendFile(path.join(__dirname, '/index.html'));
+});
+
+const PORT = process.env.PORT || 3001;
+app.listen(PORT);
+
+
+
+
+
+/*// importamos las librerías requeridas
 
 const express = require('express');
 const app = express();
@@ -12,7 +27,7 @@ const cors = require('cors');
 /*const wsServer = new WebSocketServer({
     httpServer: server,
     autoAcceptConnections: false
-});*/
+});
 
 // Especificamos el puerto en una varibale port, incorporamos cors, express 
 // y la ruta a los archivo estáticos (la carpeta public)
@@ -68,13 +83,4 @@ server.listen(app.get('port'), () =>{
 
 
 
-/*const express = require('express');
-const app = express();
-const path = require('path');
-
-app.get('/', function(req, res) {
-  res.sendFile(path.join(__dirname, '/index.html'));
-});
-
-const PORT = process.env.PORT || 3001;
-app.listen(PORT);*/
+/**/
