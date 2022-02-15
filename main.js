@@ -9,10 +9,10 @@ const WebSocketServer = require("websocket").server;
 const cors = require('cors');
 
 // Creamos el servidor de sockets y lo incorporamos al servidor de la aplicación
-const wsServer = new WebSocketServer({
+/*const wsServer = new WebSocketServer({
     httpServer: server,
     autoAcceptConnections: false
-});
+});*/
 
 // Especificamos el puerto en una varibale port, incorporamos cors, express 
 // y la ruta a los archivo estáticos (la carpeta public)
@@ -25,7 +25,9 @@ app.get('/', function(req, res) {
 });
 
 const PORT = process.env.PORT || 3001;
-app.listen(PORT);*/
+app.listen(PORT);
+
+/*
 
 //app.use(express.static(path.join(__dirname, "")));
 
@@ -69,8 +71,6 @@ server.listen(app.get('port'), () =>{
 /*const express = require('express');
 const app = express();
 const path = require('path');
-
-//const port = process.env.PORT || 8080;
 
 app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname, '/index.html'));
