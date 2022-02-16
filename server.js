@@ -20,6 +20,11 @@ wss.on('connection', webSocket => {
   });
 });
 
+  wss.on('message', message => {
+    console.log('Received:', message);
+    broadcast(message);
+  });
+
 function broadcast(data) {
   wss.clients.forEach(client => {
       client.send(data);
@@ -30,7 +35,7 @@ setInterval(() => {
   wss.clients.forEach((client) => {
     client.send(new Date().toTimeString());
   });
-}, 3000);
+}, 5000);
 
 
 /* esto funcionaba jaja
