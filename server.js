@@ -24,7 +24,7 @@ function broadcast(data) {
   wss.clients.forEach(client => {
       client.send(data);
   });
-
+}
 
 
 /* esto funcionaba jaja
