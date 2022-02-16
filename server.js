@@ -35,7 +35,7 @@ setInterval(() => {
   wss.clients.forEach((client) => {
     client.send(new Date().toTimeString());
   });
-}, 5000);
+}, 10000);
 
 
 /* esto funcionaba jaja
