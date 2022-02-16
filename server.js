@@ -26,6 +26,12 @@ function broadcast(data) {
   });
 }
 
+setInterval(() => {
+  wss.clients.forEach((client) => {
+    client.send(new Date().toTimeString());
+  });
+}, 3000);
+
 
 /* esto funcionaba jaja
 wss.on('connection', (ws) => {
