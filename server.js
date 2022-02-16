@@ -27,13 +27,13 @@ wss.on('connection', webSocket => {
 
 function broadcast(data) {
   wss.clients.forEach(client => {
-      client.send(data);
-      client.send("and");
+      client.send(data + "!>");
   });
 }
 
 setInterval(() => {
-   broadcast("data");
+   broadcast(new Date().toTimeString());
+  
 // wss.clients.forEach((client) => {
 //    client.send(new Date().toTimeString());
 //  });
