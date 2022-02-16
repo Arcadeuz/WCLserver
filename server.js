@@ -12,6 +12,22 @@ const server = express()
 
 const wss = new Server({ server });
 
+
+wss.on('connection', webSocket => {
+  webSocket.on('message', message => {
+    console.log('Received:', message);
+    broadcast(message);
+  });
+});
+
+function broadcast(data) {
+  wss.clients.forEach(client => {
+      client.send(data);
+  });
+
+
+
+/* esto funcionaba jaja
 wss.on('connection', (ws) => {
   console.log('Client connected');
   ws.on('close', () => console.log('Client disconnected'));
@@ -22,3 +38,11 @@ setInterval(() => {
     client.send(new Date().toTimeString());
   });
 }, 1000);
+
+
+}*/
+
+
+
+
+
