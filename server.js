@@ -33,9 +33,10 @@ function broadcast(data) {
 }
 
 setInterval(() => {
-  wss.clients.forEach((client) => {
-    client.send(new Date().toTimeString());
-  });
+   broadcast("data");
+// wss.clients.forEach((client) => {
+//    client.send(new Date().toTimeString());
+//  });
 }, 10000);
 
 
