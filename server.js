@@ -22,13 +22,13 @@ wss.on('connection', webSocket => {
       }, 5000);
   wss.on('message', message => {
     console.log('Received:', message);
-    broadcast("MSGG>"message);
+    broadcast("MSGG>+"message);
   });
 });
 
 
    wss.onmessage = (event) => {
-        broadcast("MSG>"event.data);
+        broadcast("MSG>"+event.data);
    };
 
 
