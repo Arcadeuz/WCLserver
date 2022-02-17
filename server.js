@@ -15,6 +15,11 @@ const wss = new Server({ server });
 
 wss.on('connection', webSocket => {
   broadcast("clien connected");
+  
+
+      setInterval(() => {
+         broadcast("Checking");
+      }, 5000);
   wss.on('message', message => {
     console.log('Received:', message);
     broadcast(message);
