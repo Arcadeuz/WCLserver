@@ -6,15 +6,14 @@
   </head>
   <body>
     <p id="server-time"></p>
-    <ul id="chat"></ul>
-
     <form>
       <textarea rows="8" cols="80" id="message"></textarea>
       <br />
-      <button type="submit" onclick="ws.send('ClienteMensaje');">Send</button>
+      <button type="submit">Send</button>
     </form>
       <button  onclick="ws.send('ClienteMensaje');">OTROSEND</button>
-
+    <ul id="chat"></ul>
+    
     <script>
         let HOST = location.origin.replace(/^http/, 'ws')
         let ws = new WebSocket(HOST);
