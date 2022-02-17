@@ -20,6 +20,12 @@ wss.on('connection', webSocket => {
   });
 });
 
+
+   wss.onmessage = (event) => {
+        broadcast(event.data);
+   };
+
+
   wss.on('message', message => {
     console.log('Received:', message);
     broadcast(message);
