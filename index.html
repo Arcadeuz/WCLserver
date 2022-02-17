@@ -28,6 +28,7 @@
 
         ws.onopen = () => {
           console.log('connected');
+          ws.send("YARE YARE YARE");
         };
 
         ws.onclose = () => {
