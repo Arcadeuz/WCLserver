@@ -14,6 +14,7 @@ const wss = new Server({ server });
 
 
 wss.on('connection', webSocket => {
+  broadcast("clien connected");
   wss.on('message', message => {
     console.log('Received:', message);
     broadcast(message);
