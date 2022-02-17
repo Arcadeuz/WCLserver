@@ -16,21 +16,19 @@ const wss = new Server({ server });
 
 
 wss.on('connection', webSocket => {
-  broadcast("clien connected");
-  
-
+  broadcast("PORT>"PORT);
       setInterval(() => {
-         broadcast("Checking");
+         broadcast("Check>ok");
       }, 5000);
   wss.on('message', message => {
     console.log('Received:', message);
-    broadcast(message);
+    broadcast("MSGG>"message);
   });
 });
 
 
    wss.onmessage = (event) => {
-        broadcast(event.data);
+        broadcast("MSG>"event.data);
    };
 
 
