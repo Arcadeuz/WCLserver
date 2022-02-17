@@ -17,13 +17,14 @@
     <script>
         let HOST = location.origin.replace(/^http/, 'ws')
         let ws = new WebSocket(HOST);
+        let ws2;
         let el;
       //  const connection = new WebSocket(HOST);
- /*           
+          
         ws.onmessage = (event) => {
           el = document.getElementById('server-time');
           el.innerHTML = 'Server time: ' + event.data;
-        };*/
+        };
 
 
         ws.onopen = () => {
