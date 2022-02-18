@@ -39,7 +39,7 @@ wss.on('connection', webSocket => {
 
 function broadcast(data) {
   wss.clients.forEach(client => {
-      client.send(data + "!>");
+      client.send(data);
   });
 }
 
