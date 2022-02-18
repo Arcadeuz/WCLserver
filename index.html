@@ -11,7 +11,7 @@
       <br />
       <button type="submit">Send</button>
     </form>
-      <button  onclick="ws.send('ClienteMensaje');">OTROSEND</button>
+      <button  onclick="ws2.send('ClienteMensaje');">OTROSEND</button>
     <ul id="chat"></ul>
     
     <script>
@@ -22,8 +22,10 @@
       //  const connection = new WebSocket(HOST);
           
         ws.onmessage = (event) => {
-          el = document.getElementById('server-time');
-          el.innerHTML = 'Server time: ' + event.data;
+            eventArr = event.data.split(">");
+            if (eventArr[0] == "PORT"){
+              ws2 = new WebSocket(HOST+eventArr[1]);
+            }
         };
 
 
@@ -52,7 +54,7 @@
         document.querySelector('form').addEventListener('submit', event => {
           event.preventDefault();
           let message = document.querySelector('#message').value;
-          ws.send(message);
+          ws2.send(message);
           document.querySelector('#message').value = '';
         });    
     </script>
