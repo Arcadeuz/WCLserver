@@ -45,7 +45,7 @@
             eventArr = event.data.split(">");
             //console.log(event.data + " -> " + eventArr[0] + " / " + eventArr[1]);
             if (eventArr[0] == "PORT"){
-              ws2 = new WebSocket(HOST+":"+eventArr[1]);
+              ws = new WebSocket(HOST+":"+eventArr[1]);
             }
           
           
@@ -60,7 +60,7 @@
         document.querySelector('form').addEventListener('submit', event => {
           event.preventDefault();
           let message = document.querySelector('#message').value;
-          ws2.send(message);
+          ws.send(message);
           document.querySelector('#message').value = '';
         });    
     </script>
