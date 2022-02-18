@@ -24,7 +24,7 @@
         ws.onmessage = (event) => {
 
             eventArr = event.data.split(">");
-                      console.log(event.data + " -> " + eventArr[0] + " / " + eventArr[1];
+                      console.log(event.data + " -> " + eventArr[0] + " / " + eventArr[1]);
             if (eventArr[0] == "PORT"){
               ws2 = new WebSocket(HOST+eventArr[1]);
             }
