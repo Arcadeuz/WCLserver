@@ -22,7 +22,9 @@
       //  const connection = new WebSocket(HOST);
           
         ws.onmessage = (event) => {
+
             eventArr = event.data.split(">");
+                      console.log(event.data + " -> " + eventArr[0] + " / " + eventArr[1];
             if (eventArr[0] == "PORT"){
               ws2 = new WebSocket(HOST+eventArr[1]);
             }
@@ -43,7 +45,7 @@
         };
 
         ws.onmessage = event => {
-          console.log('received', event.data);
+          //console.log('received', event.data);
           let li = document.createElement('li');
           li.innerText = event.data;
           document.querySelector('#chat').append(li);
