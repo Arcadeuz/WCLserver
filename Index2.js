@@ -55,11 +55,10 @@ io.on('connection', (socket) => {
   
    // when the client emits 'createGameServer', this listens and executes
   socket.on('createGameServer', (serverConfig) => {
-    let server = {owner: socket.userID, players = [0,0,0,0], sData: serverConfig}
+    let server = {owner: socket.userID, sData: serverConfig}
     gameServers[svrID] = server;
-    socket.emit('onlineGameServer', {
-      serverID: svrID
-    });
+    socket.join("svrID-"+svrID);
+    io.sockets.in("svrID-"+svrID).emit('onGameServer', {serverID: svrID});
     ++svrID;    
   });
   
