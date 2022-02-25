@@ -58,17 +58,26 @@ io.on('connection', (socket) => {
     let server = {owner: socket.userID, sData: serverConfig}
     gameServers[svrID] = server;
     socket.join("svrID-"+svrID);
+    socket.svrID = svrID;
     io.sockets.in("svrID-"+svrID).emit('onGameServer', {serverID: svrID});
     ++svrID;    
   });
   
   socket.on('listGameServer', (from) => {
-    gameServers[svrID] = server;
-    socket.emit('onlineGameServer', {
-      serverID: svrID
-    });
+     socket.emit('currentGameServer', { serverList : gameServers});
+  });
+  
+  socket.on('joinGameServer', (serverID) => {
+    socket.svrID = serverID;
+    socket.join("svrID-"+serverID);
+    io.sockets.in("svrID-"+serverID).emit('playerJoin', {userID: socket.userID});
     ++svrID;    
   });
+  
+  socket.on('sendtoGameServer', (data) => {
+    io.sockets.in("svrID-"+ socket.svrID).emit('gameServerInfo', data);
+  });
+
   
   
   // when the user disconnects.. perform this
