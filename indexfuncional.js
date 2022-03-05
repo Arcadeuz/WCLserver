@@ -3,7 +3,17 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const server = require('http').createServer(app);
-const io = require('socket.io')(server);
+//const io = require('socket.io')(server);
+const io = socketio(server, {
+    cors: {
+        origin: `http://fart-game.herokuapp.com`, // I copied the origin in the error message and pasted here
+        methods: ["GET", "POST"],
+        credentials: true
+      }
+});
+
+
+
 const port = process.env.PORT || 3000;
 const cors=require("cors");
 /*const corsOptions ={
