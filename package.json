@@ -2,7 +2,7 @@
   "name": "socket.io-chat",
   "version": "0.0.0",
   "description": "A simple chat client using socket.io",
-  "main": "index.js",
+  "main": "indexfuncional.js",
   "author": "Grant Timmerman",
   "private": true,
   "license": "BSD",
@@ -11,6 +11,6 @@
     "socket.io": "^4.0.0"
   },
   "scripts": {
-    "start": "node index.js"
+    "start": "node indexfuncional.js"
   }
 }
