@@ -3,7 +3,24 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const server = require('http').createServer(app);
-const io = require('socket.io')(server);
+const cors=require("cors");
+app.use(cors()) // Use this after the variable declaration
+
+const io = require('socket.io')(server,  
+        cors: {
+                origin: ["*"], 
+                handlePreflightRequest:(req,res) => {
+                    res.WriteHead(200, {
+                     "Access-Control-Allow-Origin": "*",
+                     "Access-Control-Allow-Methods": "GET, POST",
+                     "Access-Control-Allow-Headers": "my-custom-header",
+                     "Access-Control-Allow-Credential": True
+                    });
+                    res.end();
+                 }
+         });
+
+
 /*const io = socketio(server, {
     cors: {
         origin: `http://fart-game.herokuapp.com`, // I copied the origin in the error message and pasted here
@@ -15,14 +32,14 @@ const io = require('socket.io')(server);
 
 
 const port = process.env.PORT || 3000;
-const cors=require("cors");
+
 /*const corsOptions ={
    origin:'*', 
    credentials:true,            //access-control-allow-credentials:true
    optionSuccessStatus:200,
 }*/
 
-app.use(cors()) // Use this after the variable declaration
+
 /*
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", '*');
