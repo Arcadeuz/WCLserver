@@ -6,20 +6,13 @@ const server = require('http').createServer(app);
 const cors=require("cors");
 app.use(cors()) // Use this after the variable declaration
 
-const io = require('socket.io')(server,{  
-         cors: {
-                origin: ["*"], 
-                handlePreflightRequest:(req,res) => {
-                    res.WriteHead(200, {
-                     "Access-Control-Allow-Origin": "*",
-                     "Access-Control-Allow-Methods": "GET, POST",
-                     "Access-Control-Allow-Headers": "my-custom-header",
-                     "Access-Control-Allow-Credential": True
-                    });
-                    res.end();
-                 }
-           }   
-         });
+const io = require('socket.io')(server,{
+                                        cors: {
+                                            origin: "*", // I copied the origin in the error message and pasted here
+                                            methods: ["GET", "POST"],
+                                            credentials: true
+                                          }
+                                    });
 
 
 /*const io = socketio(server, {
