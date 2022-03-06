@@ -3,7 +3,17 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const server = require('http').createServer(app);
-const io = require('socket.io')(server);
+const cors=require("cors");
+app.use(cors()) // Use this after the variable declaration
+const io = require('socket.io')(server,{
+                                        cors: {
+                                            origin: "*", // I copied the origin in the error message and pasted here
+                                            methods: ["GET", "POST"],
+                                            credentials: true
+                                          }
+                                    });
+
+
 const port = process.env.PORT || 3000;
 
 server.listen(port, () => {
