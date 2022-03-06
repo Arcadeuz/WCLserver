@@ -6,8 +6,8 @@ const server = require('http').createServer(app);
 const cors=require("cors");
 app.use(cors()) // Use this after the variable declaration
 
-const io = require('socket.io')(server,  
-        cors: {
+const io = require('socket.io')(server,{  
+         cors: {
                 origin: ["*"], 
                 handlePreflightRequest:(req,res) => {
                     res.WriteHead(200, {
@@ -18,6 +18,7 @@ const io = require('socket.io')(server,
                     });
                     res.end();
                  }
+           }   
          });
 
 
