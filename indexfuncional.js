@@ -12,11 +12,15 @@ app.use(cors()) // Use this after the variable declaration
                                             credentials: true
                                           }
                                     });*/
-const io = require("socket.io")(server, {
-	cors: {
-        origin: '*'
-    }
-});
+const io = require('socket.io')(server,{
+        cors: {
+                origin: "*",
+                methods: ["GET", "POST"],
+                credentials: true,
+                transports: ['websocket', 'polling'],
+        },
+        allowEIO3: true
+        });
 
 
 const port = process.env.PORT || 3000;
