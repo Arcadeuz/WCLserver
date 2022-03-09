@@ -6,12 +6,16 @@ const server = require('http').createServer(app);
 const cors=require("cors");
 app.use(cors()) // Use this after the variable declaration
 const io = require('socket.io')(server,{
-                                        cors: {
-                                            origin: "*", // I copied the origin in the error message and pasted here
-                                            methods: ["GET", "POST"],
-                                            credentials: true
-                                          }
-                                    });
+        cors: {
+                origin: "*",
+                methods: ["GET", "POST"],
+                credentials: true,
+                transports: ['websocket', 'polling'],
+        },
+        allowEIO3: true
+        });
+
+
 
 
 const port = process.env.PORT || 3000;
