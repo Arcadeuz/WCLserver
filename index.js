@@ -73,7 +73,7 @@ io.on('connection', (socket) => {
     gameServers[svrID] = server;
     socket.join("svrID-"+svrID);
     socket.svrID = svrID;
-    io.sockets.in("svrID-"+svrID).emit('onGameServer', svrID);
+    io.sockets.in("svrID-"+svrID).emit('onGameServer', "servercreado?");
     ++svrID;    
   });
   
