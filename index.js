@@ -60,7 +60,7 @@ io.on('connection', (socket) => {
                 ++userID;
                 addedUser = true;
                 socket.emit('login', {
-                        numUsers: numUsers
+                        numUsers: numUsers,
                         loginUserID: userID
                  });
     
