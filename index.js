@@ -75,7 +75,7 @@ io.on('connection', (socket) => {
             gameServers["svrID-"+svrID] = server;
             socket.join("svrID-"+svrID);
             socket.svrID = svrID;
-            io.sockets.in("svrID-"+svrID).emit('onGameServer', "svrID-"+svrID);
+            io.sockets.in("svrID-"+svrID).emit('onGameServer', "svrID-"+ socket.svrID);
             ++svrID;
     }else{
         socket.emit('error', "alredyOnServer");
@@ -83,7 +83,7 @@ io.on('connection', (socket) => {
   });
   
   socket.on('listGameServer', (from) => {
-     socket.emit('currentGameServer', { serverList : gameServers});
+     socket.emit('currentGameServer', gameServers);
   });
   
   socket.on('joinGameServer', (serverID) => {
