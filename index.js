@@ -71,8 +71,8 @@ io.on('connection', (socket) => {
    // when the client emits 'createGameServer', this listens and executes
   socket.on('createGameServer', (serverConfig) => {
     if (socket.svrID != 0) {     
-            let server = {ownerName: socket.username, ownerID: socket.userID, sID: "svrID-"+svrID, sData: serverConfig}
-            gameServers["svrID-"+svrID] = server;
+            let server = {ownerName: socket.username, ownerID: socket.userID, sID: svrID, sData: serverConfig}
+            gameServers[svrID] = server;
             socket.join("svrID-"+svrID);
             socket.svrID = svrID;
             io.sockets.in("svrID-"+svrID).emit('onGameServer', "svrID-"+ socket.svrID);
