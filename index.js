@@ -53,6 +53,7 @@ io.on('connection', (socket) => {
     // we store the username in the socket session for this client
     socket.username = username;
     socket.userID = userID;
+    socket.svrID = 0;
     ++numUsers;
     ++userID;
     addedUser = true;
@@ -69,12 +70,16 @@ io.on('connection', (socket) => {
   
    // when the client emits 'createGameServer', this listens and executes
   socket.on('createGameServer', (serverConfig) => {
-    let server = {owner: socket.userID, sData: serverConfig}
-    gameServers[svrID] = server;
-    socket.join("svrID-"+svrID);
-    socket.svrID = svrID;
-    io.sockets.in("svrID-"+svrID).emit('onGameServer', "servercreado?");
-    ++svrID;    
+    if (socket.svrID != 0) {     
+            let server = {ownerName: socket.username, ownerID: socket.userID, sData: serverConfig}
+            gameServers["svrID-"+svrID] = server;
+            socket.join("svrID-"+svrID);
+            socket.svrID = svrID;
+            io.sockets.in("svrID-"+svrID).emit('onGameServer', "svrID-"+svrID);
+            ++svrID;
+    }else{
+        socket.emit('error', "alredyOnServer");
+    }
   });
   
   socket.on('listGameServer', (from) => {
