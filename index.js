@@ -36,6 +36,9 @@ let svrID = 1; //mejorar para que no se mezclen. Tendria que ser un array
 
 io.on('connection', (socket) => {
   let addedUser = false;
+    socket.username = "";
+    socket.userID = 0;
+    socket.svrID = 0;      
 
   // when the client emits 'new message', this listens and executes
   socket.on('new message', (data) => {
