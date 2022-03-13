@@ -90,14 +90,21 @@ io.on('connection', (socket) => {
         });
   
         socket.on('joinGameServer', (serverID) => {
-                socket.svrID = serverID;
-                socket.join("svrID-"+serverID);
-                io.sockets.in("svrID-"+serverID).emit('playerJoin', {userID: socket.userID});
-                ++svrID;    
+                if (socket.svrID != 0) {
+                        socket.emit('onlineError', "alredyOnServer");
+                }else{        
+                        socket.svrID = serverID;
+                        socket.join("svrID-"+serverID);
+                        io.sockets.in("svrID-"+serverID).emit('playerJoin', {userID: socket.userID});
+                }
         });
   
         socket.on('sendtoGameServer', (data) => {
-                io.sockets.in("svrID-"+ socket.svrID).emit('gameServerInfo', data);
+                if (socket.svrID == 0) {
+                        socket.emit('onlineError', "notOnServer");
+                }else{
+                        io.sockets.in("svrID-"+ socket.svrID).emit('gameServerInfo', data);
+                }
         });
 
   
@@ -108,8 +115,8 @@ io.on('connection', (socket) => {
                         --numUsers;
                         // echo globally that this client has left
                         socket.broadcast.emit('user left', {
-                        username: socket.username,
-                        numUsers: numUsers
+                                username: socket.username,
+                                numUsers: numUsers
                         });
                 }
         });
