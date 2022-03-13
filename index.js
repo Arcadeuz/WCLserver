@@ -31,7 +31,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 let numUsers = 0;
 let gameServers = new Array();
-gameServers = [];
 let userID = 1; //mejorar para que no se mezclen los ids. Tendria que ser un array
 let svrID = 1; //mejorar para que no se mezclen. Tendria que ser un array
 
