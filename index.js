@@ -76,8 +76,8 @@ io.on('connection', (socket) => {
                 if (socket.svrID != 0) {
                         socket.emit('onlineError', "alredyOnServer");
                 }else{
-                        let server = {ownerName: socket.username, ownerID: socket.userID, sID: svrID, sData: serverConfig}
-                        gameServers[svrID] = server;
+                        let server = {ownerName: socket.username, ownerID: socket.userID, sID: svrID, players: [socket.userID] sData: serverConfig}
+                        gameServers.push(server);
                         socket.join("svrID-"+svrID);
                         socket.svrID = svrID;
                         io.sockets.in("svrID-"+svrID).emit('onGameServer', socket.svrID);
@@ -96,8 +96,35 @@ io.on('connection', (socket) => {
                         socket.svrID = serverID;
                         socket.join("svrID-"+serverID);
                         io.sockets.in("svrID-"+serverID).emit('playerJoin', {userID: socket.userID});
+                        i = gameServers.findIndex(server => server.sID == serverID);
+                        gameServers[i].players.push(socket.userID);
+             
                 }
         });
+
+        socket.on('leaveGameServer', (serverID) => {
+                if (socket.svrID == 0) {
+                        socket.emit('onlineError', "NotOnServer");
+                }else{        
+                        
+                        socket.leave("svrID-"+svrID);
+                        io.sockets.in("svrID-"+serverID).emit('playerLeft', {userID: socket.userID});
+                        socket.svrID = 0;
+                        i = gameServers.findIndex(server => server.sID == serverID);
+                        j = gameServers[i].players.indexOf(socket.userID)
+                        gameServers[i].players.splice(j,1);
+                        if ( gameServers[i].ownerID  == userID){
+                            if (gameServers[i].players.length > 0){ //put first player joint to owner
+                                gameServers[i].ownerID = gameServers[i].players[0];
+                            } else{
+                                //delete gameserver
+                                gameServers.splice(i,1);    
+                            }   
+                        }
+             
+                }
+        });
+        
   
         socket.on('sendtoGameServer', (data) => {
                 if (socket.svrID == 0) {
