@@ -76,7 +76,7 @@ io.on('connection', (socket) => {
                 if (socket.svrID != 0) {
                         socket.emit('onlineError', "alredyOnServer");
                 }else{
-                        let server = {ownerName: socket.username, ownerID: socket.userID, sID: svrID, players: [socket.userID] sData: serverConfig}
+                        let server = {ownerName: socket.username, ownerID: socket.userID, sID: svrID, players: [socket.userID], sData: serverConfig}
                         gameServers.push(server);
                         socket.join("svrID-"+svrID);
                         socket.svrID = svrID;
