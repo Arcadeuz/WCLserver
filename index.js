@@ -96,13 +96,13 @@ io.on('connection', (socket) => {
                         socket.svrID = serverID;
                         socket.join("svrID-"+serverID);
                         io.sockets.in("svrID-"+serverID).emit('playerJoin', {userID: socket.userID});
-                        i = gameServers.findIndex(server => server.sID == serverID);
-                        gameServers[i].players.push(socket.userID);
+                       // i = gameServers.findIndex(server => server.sID == serverID);
+                       // gameServers[i].players.push(socket.userID);
              
                 }
         });
 
-        socket.on('leaveGameServer', (serverID) => {
+     /*   socket.on('leaveGameServer', (serverID) => {
                 if (socket.svrID == 0) {
                         socket.emit('onlineError', "NotOnServer");
                 }else{        
@@ -123,7 +123,7 @@ io.on('connection', (socket) => {
                         }
              
                 }
-        });
+        });*/
         
   
         socket.on('sendtoGameServer', (data) => {
