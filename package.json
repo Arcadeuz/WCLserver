@@ -13,9 +13,4 @@
   "scripts": {
     "start": "indexfuncional.js"
   },  
-"engines": {
-    "node": "8.x",
-    "npm": ">= 3"
-}
- 
 }
