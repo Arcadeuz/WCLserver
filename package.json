@@ -1,9 +1,9 @@
 {
-  "name": "socket.io-chat",
+  "name": "socket.io-server",
   "version": "0.0.0",
-  "description": "A simple chat client using socket.io",
+  "description": "A server for my games - thanks  Grant Timmerman",
   "main": "index.js",
-  "author": "Grant Timmerman",
+  "author": "Arcadeuz",
   "private": true,
   "license": "BSD",
   "dependencies": {
@@ -13,4 +13,9 @@
   "scripts": {
     "start": "node index.js"
   }
+  "engines" : { 
+    "npm" : ">=7.0.0",
+    "node" : ">=16.0.0"
+  }
+  
 }
