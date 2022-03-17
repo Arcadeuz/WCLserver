@@ -77,7 +77,7 @@ io.on('connection', (socket) => {
                         socket.emit('onlineError', "alredyOnServer");
                 }else{
                         let server = {ownerName: socket.username, ownerID: socket.userID, sID: svrID, players: [socket.userID], sData: serverConfig}
-                        gameServers.push(server);
+                       // gameServers.push(server);
                         socket.join("svrID-"+svrID);
                         socket.svrID = svrID;
                         io.sockets.in("svrID-"+svrID).emit('onGameServer', socket.svrID);
@@ -96,12 +96,12 @@ io.on('connection', (socket) => {
                         socket.svrID = serverID;
                         socket.join("svrID-"+serverID);
                         io.sockets.in("svrID-"+serverID).emit('playerJoin', {userID: socket.userID});
-                        i = gameServers.findIndex(server => server.sID == serverID);
-                        gameServers[i].players.push(socket.userID);
+                      //  i = gameServers.findIndex(server => server.sID == serverID);
+                      //  gameServers[i].players.push(socket.userID);
              
                 }
         });
-
+/*
         socket.on('leaveGameServer', (serverID) => {
                 if (socket.svrID == 0) {
                         socket.emit('onlineError', "NotOnServer");
@@ -123,7 +123,7 @@ io.on('connection', (socket) => {
                         }
              
                 }
-        });
+        });*/
         
   
         socket.on('sendtoGameServer', (data) => {
