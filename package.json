@@ -2,7 +2,7 @@
   "name": "socket.io-server",
   "version": "0.0.0",
   "description": "A server for my games - thanks  Grant Timmerman",
-  "main": "indexfuncional.js",
+  "main": "index.js",
   "author": "Arcadeuz",
   "private": true,
   "license": "BSD",
@@ -11,6 +11,6 @@
     "socket.io": "^4.0.0"
   },
   "scripts": {
-    "start": "indexfuncional.js"
+    "start": "index.js"
   }
 }
