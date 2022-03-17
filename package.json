@@ -12,10 +12,5 @@
   },
   "scripts": {
     "start": "index.js"
-  },  
-"engines": {
-    "node": "8.x",
-    "npm": ">= 3"
-}
- 
+  } 
 }
