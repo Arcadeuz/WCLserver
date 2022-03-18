@@ -102,18 +102,16 @@ io.on('connection', (socket) => {
                 }
         });
 
-        socket.on('leaveGameServer', (serverID) => {
+        socket.on('leaveGameServer', (data) => {
                 if (socket.svrID == 0) {
                         socket.emit('onlineError', "NotOnServer");
                 }else{        
-                        
-                        socket.leave("svrID-"+svrID);
-                        io.sockets.in("svrID-"+serverID).emit('playerLeft', {userID: socket.userID});
-                        socket.svrID = 0;
-                        i = gameServers.findIndex(server => server.sID == serverID);
+                        io.sockets.in("svrID-"+socket.svrID ).emit('playerLeft', {userID: socket.userID});
+                        socket.leave("svrID-"+socket.svrID );
+                        i = gameServers.findIndex(server => server.sID == socket.svrID);
                         j = gameServers[i].players.indexOf(socket.userID)
                         gameServers[i].players.splice(j,1);
-                        if ( gameServers[i].ownerID  == userID){
+                        if ( gameServers[i].ownerID  == socket.userID){
                             if (gameServers[i].players.length > 0){ //put first player joint to owner
                                 gameServers[i].ownerID = gameServers[i].players[0];
                             } else{
@@ -121,6 +119,7 @@ io.on('connection', (socket) => {
                                 gameServers.splice(i,1);    
                             }   
                         }
+                        socket.svrID = 0;
              
                 }
         });
