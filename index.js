@@ -95,7 +95,7 @@ io.on('connection', (socket) => {
                 }else{        
                         socket.svrID = serverID;
                         socket.join("svrID-"+serverID);
-                        io.sockets.in("svrID-"+serverID).emit('playerJoin', {userID: socket.userID});
+                        io.sockets.in("svrID-"+serverID).emit('playerJoin', {userID: socket.userID, userName: socket.username});
                         i = gameServers.findIndex(server => server.sID == serverID);
                         gameServers[i].players.push(socket.userID);
              
