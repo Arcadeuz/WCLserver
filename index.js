@@ -124,6 +124,19 @@ io.on('connection', (socket) => {
                 }
         });
         
+        socket.on('deleteGameServer', (data) => {
+                if (socket.svrID == 0) {
+                        socket.emit('onlineError', "NotOnServer");
+                }else{        
+                        io.sockets.in("svrID-"+socket.svrID ).emit('serverLeft', "disconnectServer");
+                        //socket.leave("svrID-"+socket.svrID );
+                        socket.socketsLeave("svrID-"+socket.svrID );
+                        i = gameServers.findIndex(server => server.sID == socket.svrID);
+                        gameServers.splice(i,1); 
+                        socket.svrID = 0;
+                }
+        });
+        
   
         socket.on('sendtoGameServer', (data) => {
                 if (socket.svrID == 0) {
