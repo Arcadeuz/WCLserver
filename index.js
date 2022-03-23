@@ -71,7 +71,7 @@ io.on('connection', (socket) => {
                 });
           });
   
-        // when the client emits 'createGameServer', this listens and executes
+        // when the clientServer emits 'createGameServer', this listens and executes
         socket.on('createGameServer', (serverConfig) => {
                 if (socket.svrID != 0) {
                         socket.emit('onlineError', "alredyOnServer");
@@ -80,10 +80,24 @@ io.on('connection', (socket) => {
                         gameServers.push(server);
                         socket.join("svrID-"+svrID);
                         socket.svrID = svrID;
-                        io.sockets.in("svrID-"+svrID).emit('onGameServer', socket.svrID);
+                        io.sockets.in("svrID-"+socket.svrID).emit('onGameServer', socket.svrID);
                         ++svrID;
                 } 
         });
+        
+        // when the clientServer emits 'actualizeGameServer', this listens and executes
+        socket.on('actualizeGameServer', (serverConfig) => {
+                if (socket.svrID == 0) {
+                        socket.emit('onlineError', "notOnServer");
+                }else{        
+                        i = gameServers.findIndex(server => server.sID == socket.svrID;);
+                        gameServers[i].sData = serverConfig;
+                        io.sockets.in("svrID-"+socket.svrID).emit('newConfigGameServer', gameServers[i].sData);
+                }
+                
+                
+        });
+        
   
         socket.on('listGameServer', (from) => {
                 socket.emit('currentGameServer', gameServers);
