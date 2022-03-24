@@ -90,7 +90,7 @@ io.on('connection', (socket) => {
                 if (socket.svrID == 0) {
                         socket.emit('onlineError', "notOnServer");
                 }else{        
-                        i = gameServers.findIndex(server => server.sID == socket.svrID;);
+                        i = gameServers.findIndex(server => server.sID == socket.svrID);
                         gameServers[i].sData = serverConfig;
                         io.sockets.in("svrID-"+socket.svrID).emit('newConfigGameServer', gameServers[i].sData);
                 }
