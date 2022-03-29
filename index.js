@@ -94,8 +94,6 @@ io.on('connection', (socket) => {
                         gameServers[i].sData = serverConfig;
                         io.sockets.in("svrID-"+socket.svrID).emit('newConfigGameServer', gameServers[i].sData);
                 }
-                
-                
         });
         
   
@@ -152,16 +150,28 @@ io.on('connection', (socket) => {
         });
         
   
-        socket.on('sendtoGameServer', (data) => {
+        socket.on('sendInfoGameServer', (data) => {
                 if (socket.svrID == 0) {
                         socket.emit('onlineError', "notOnServer");
                 }else{
                         io.sockets.in("svrID-"+ socket.svrID).emit('gameServerInfo', data);
                 }
         });
+        socket.on('sendPlayGameServer', (data) => {
+                if (socket.svrID == 0) {
+                        socket.emit('onlineError', "notOnServer");
+                }else{
+                        io.sockets.in("svrID-"+ socket.svrID).emit('gameServerPlay', data);
+                }
+        });
+        socket.on('sendSelGameServer', (data) => {
+                if (socket.svrID == 0) {
+                        socket.emit('onlineError', "notOnServer");
+                }else{
+                        io.sockets.in("svrID-"+ socket.svrID).emit('gameServerSel', data);
+                }
+        });
 
-  
-  
         // when the user disconnects.. perform this
         socket.on('disconnect', () => {
                 if (addedUser) {
