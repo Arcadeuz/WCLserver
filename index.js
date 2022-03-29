@@ -80,7 +80,7 @@ io.on('connection', (socket) => {
                         gameServers.push(server);
                         socket.join("svrID-"+svrID);
                         socket.svrID = svrID;
-                        io.sockets.in("svrID-"+socket.svrID).emit('onGameServer', socket.svrID);
+                        io.sockets.in("svrID-"+socket.svrID).emit('gameServerCreate', socket.svrID);
                         ++svrID;
                 } 
         });
@@ -92,13 +92,13 @@ io.on('connection', (socket) => {
                 }else{        
                         i = gameServers.findIndex(server => server.sID == socket.svrID);
                         gameServers[i].sData = serverConfig;
-                        io.sockets.in("svrID-"+socket.svrID).emit('newConfigGameServer', gameServers[i].sData);
+                        io.sockets.in("svrID-"+socket.svrID).emit('gameServerActualize', gameServers[i].sData);
                 }
         });
         
   
         socket.on('listGameServer', (from) => {
-                socket.emit('currentGameServer', gameServers);
+                socket.emit('gameServerList', gameServers);
         });
   
         socket.on('joinGameServer', (serverID) => {
