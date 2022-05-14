@@ -110,15 +110,15 @@ io.on('connection', (socket) => {
                         io.sockets.in("svrID-"+serverID).emit('playerJoin', {userID: socket.userID, userName: socket.username});
                         i = gameServers.findIndex(server => server.sID == serverID);
                         gameServers[i].players.push(socket.userID);
-             
-                }
+                        socket.emit('gameServerjoin',  gameServers[i].sData);
+                 }
         });
 
         socket.on('leaveGameServer', (data) => {
                 if (socket.svrID == 0) {
                         socket.emit('onlineError', "NotOnServer");
                 }else{        
-                        io.sockets.in("svrID-"+socket.svrID ).emit('playerLeft', {userID: socket.userID});
+                        io.sockets.in("svrID-"+socket.svrID ).emit('playerLeft',  {userID: socket.userID, userName: socket.username});
                         socket.leave("svrID-"+socket.svrID );
                         i = gameServers.findIndex(server => server.sID == socket.svrID);
                         j = gameServers[i].players.indexOf(socket.userID)
@@ -126,6 +126,7 @@ io.on('connection', (socket) => {
                         if ( gameServers[i].ownerID  == socket.userID){
                             if (gameServers[i].players.length > 0){ //put first player joint to owner
                                 gameServers[i].ownerID = gameServers[i].players[0];
+                                io.sockets.in("svrID-"+socket.svrID ).emit('playerOwner', {userID: socket.userID, userName: socket.username});
                             } else{
                                 //delete gameserver
                                 gameServers.splice(i,1);    
